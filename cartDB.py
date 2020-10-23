@@ -1,5 +1,15 @@
 #!/usr/bin/env python
 
+
+# This is a Shopping Cart that lets the user create a cart and perform different actions to it.
+# Action included are:
+#   1. Create Cart for the Shopping Site
+#   2. Add Items to Cart
+#   3. Remove Items from the Cart
+#   4. Get Items from the Cart
+#   5. Update any values of the items in the Cart
+
+
 from pymongo import MongoClient
 
 # Create a MongoDB Client to connect to
@@ -16,6 +26,16 @@ def create_cart():
     return True
 
 def add_items(name, qty, price):
+    
+    '''
+    Function to Add items to the shopping cart
+    Params: 
+        Product Name
+        Product Qty
+        Product Unit Price
+    Returns: None
+    '''
+
     coll = db.cart
     qry = {
         "prodName": name,
@@ -27,6 +47,15 @@ def add_items(name, qty, price):
     print('\nItem Inserted successfully!!\n')
 
 def get__specific_item(name):
+
+    '''
+    Function to Get Specified items from the shopping cart
+    Params: 
+        Product Name
+    Return:
+        Product Details from the Cart
+    '''
+
     coll = db.cart
     
     print('\n')
@@ -39,6 +68,14 @@ def get__specific_item(name):
         print('\nNo such record present\n')
 
 def show_items():
+
+    '''
+    Function to Get All the  items from the shopping cart
+    Params: None
+    Return:
+        Product Details
+    '''
+
     coll = db.cart
     print('\n')
     
@@ -51,6 +88,14 @@ def show_items():
 
 
 def remove_items(name):
+
+    '''
+    Function to Remove Specific items from the shopping cart
+    Params: 
+        Product Name
+    Returns: None
+    '''
+
     coll = db.cart
     rec = coll.find({"prodName": name})
     
@@ -62,6 +107,16 @@ def remove_items(name):
         print('\nDeletion Failed, Not such Item present\n')
 
 def update_items():
+
+    '''
+    Function to Update Specific items in the shopping cart
+    Params: 
+        Product Name
+        Product Qty
+        Product Unit Price
+    Returns: None
+    '''
+
     print('\n')
     prodName = input('Name of item: ')
     
@@ -90,6 +145,9 @@ def update_items():
     
     else:
         print('\nUpdation Failed, No such record present\n')
+
+
+# Driver Code to setup
 
 if __name__ == '__main__':
     print('\nWelcome to Shopping Center!!\nEnjoy Shopping!!\n')
